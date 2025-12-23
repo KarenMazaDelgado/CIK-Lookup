@@ -47,7 +47,7 @@ def lambda_handler(event, context):
         # document_info should contain the S3 key or path to the filing
         # Let's assume document_info contains the S3 key for the file you want
 
-        s3_key = document_info.get("s3_key")  # or however your CIKLookup returns file path
+        # s3_key = document_info.get("s3_key") 
 
         # # Fallback: If CIKLookup returns raw text instead of path, adjust accordingly
         # if not s3_key:
