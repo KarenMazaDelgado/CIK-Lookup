@@ -1,5 +1,5 @@
 ### Financial Document Contextualizer 
-An automated pipeline deployed on AWS Lambda that leverages Claude 3 (Anthropic) via AWS Bedrock to perform RAG (Retrieval-Augmented Generation) on real-time SEC filings.
+An automated pipeline deployed on **AWS Lambda** that leverages **Claude 3 (Anthropic)** via **AWS Bedrock** to perform RAG (Retrieval-Augmented Generation) on real-time SEC filings.
 
 ### Overview
 This project automates the ingestion of financial data directly from the SEC EDGAR database. By translating company names into Central Index Keys (CIK), the system retrieves specific 10-K (Annual) or 10-Q (Quarterly) filings and utilizes Large Language Models (LLMs) to extract financial insights based on user queries.
@@ -15,10 +15,6 @@ Cloud: AWS Lambda, AWS Bedrock
 Model: Anthropic Claude 3 Sonnet 
 
 Data Source: SEC EDGAR API
-
-# Financial Document Contextualizer 📊🤖
-
-An automated pipeline deployed on **AWS Lambda** that leverages **Claude 3 (Anthropic)** via **AWS Bedrock** to perform RAG (Retrieval-Augmented Generation) on real-time SEC filings.
 
 ## ✨ Key Features
 * **Real-Time Summarization:** Extracts and summarizes key financial insights from massive SEC filings in seconds.
