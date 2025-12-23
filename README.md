@@ -24,9 +24,10 @@ Data Source: SEC EDGAR API
 
 ## 📁 Project Structure
 ```text
-├── CIK_Lookup.py      # Helper module for SEC CIK mapping and document retrieval
-├── Claude_lambda.py   # Main AWS Lambda handler for Bedrock model invocation
-├── SEC_LambdaOne.py   # Data ingestion script for S3 ticker updates
+├── CIK_Lookup.py      # Core helper module for SEC CIK mapping and data retrieval
+├── SEC_LambdaOne.py   # Ingestion: Downloads & stores master ticker data to S3
+├── SEC_LambdaTwo.py   # Retrieval: Maps user requests to specific SEC filing metadata
+├── Claude_lambda.py   # Analysis: Ingests filing text and generates AI summaries via Bedrock
 ├── .gitignore         # Prevents tracking of local dependency packages
 └── README.md          # Project documentation
 ```
