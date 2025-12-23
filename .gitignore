@@ -1,0 +1,17 @@
+# Python dependencies
+bin/
+package/
+lib/
+certifi/
+charset_normalizer/
+idna/
+requests/
+urllib3/
+*.dist-info/
+
+# Compiled files
+__pycache__/
+*.pyc
+
+# Local deployment packages
+*.zip

@@ -38,7 +38,7 @@ class CIKLookup:
         return self.ticker_dict.get(ticker.upper(), None)
     
     # Get subsmissions from JSON data 
-    def get_submissions(cik):
+    def get_submissions(self, cik):
         cik = str(cik).zfill(10) # Make sure the CIK num has leading zeros with 10 total digits
         url = f"https://data.sec.gov/submissions/CIK{cik}.json"
         headers = {
@@ -50,18 +50,18 @@ class CIKLookup:
         return response.json()
     
     # Build the URL to the HTML filing document
-    def build_filing_url(cik, accession, document):
+    def build_filing_url(self, cik, accession, document):
         cik = str(int(cik))  # strip leading zeros
         accession = accession.replace("-", "")
         return f"https://www.sec.gov/Archives/edgar/data/{cik}/{accession}/{document}"
     
     
     # Look for latest 10-K given the year
-    def annual_filing(cik, year):
-        data = get_submissions(cik)
+    def annual_filing(self, cik, year):
+        data = self.get_submissions(cik)
         filings = data["filings"]["recent"] # Isolate recent section from JSON
 
-        # Index is important because lists are parallel (tabular data) where for ex, 0th form goes with 0th filingData, 0th accessionNumber and 0th primaryDocument, like pulling data from the same row(i) across different columns
+        # Index is important because lists are parallel (tabular data) where for example, 0th form goes with 0th filingData, 0th accessionNumber and 0th primaryDocument, like pulling data from the same row(i) across different columns
         for i, form_type in enumerate(filings["form"]): # Get both the index and the form type string in filings["form"]
             if form_type == "10-K":
                 filing_year = filings["filingDate"][i][:4] # Get filing date for the same index and take first 4 characters (year)
@@ -79,8 +79,8 @@ class CIKLookup:
         return None  # If no 10-K found for that year
     
     # Look for 10-Q filing for specific quarter of the year
-    def quarterly_filing(cik, year, quarter):
-        data = get_submissions(cik)
+    def quarterly_filing(self, cik, year, quarter):
+        data = self.get_submissions(cik)
         filings = data["filings"]["recent"]
 
         #Dictionary that maps quarters (1-4) to their start and end dates within a given year
@@ -109,3 +109,20 @@ class CIKLookup:
                         "document": document
                     }
         return None  # If no 10-Q found in that quarter
+    
+
+    def get_filing_content(self, url):
+        """
+        Automates document ingestion by fetching the raw text/HTML from the SEC.
+        This provides the content needed for LLM prompt enrichment.
+        """
+        try:
+           
+            response = requests.get(url, headers=self.headers)
+            response.raise_for_status()
+            
+            # This returns the raw text that your AWS Lambda will pass to Bedrock
+            return response.text
+        except Exception as e:
+            print(f"Error fetching document content: {str(e)}")
+            return None
