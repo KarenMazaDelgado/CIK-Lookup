@@ -121,7 +121,7 @@ class CIKLookup:
             response = requests.get(url, headers=self.headers)
             response.raise_for_status()
             
-            # This returns the raw text that your AWS Lambda will pass to Bedrock
+            # This returns the raw text that AWS Lambda will pass to Bedrock
             return response.text
         except Exception as e:
             print(f"Error fetching document content: {str(e)}")
