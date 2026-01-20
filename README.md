@@ -4,7 +4,7 @@ An automated pipeline deployed on **AWS Lambda** that leverages **Claude 3 (Anth
 ### Overview
 This project automates the ingestion of financial data directly from the SEC EDGAR database. By translating company names into Central Index Keys (CIK), the system retrieves specific 10-K (Annual) or 10-Q (Quarterly) filings and utilizes Large Language Models (LLMs) to extract financial insights based on user queries.
 
-### 🛠️ Tech Stack
+###  Tech Stack
 
 Language: Python 
 
@@ -16,13 +16,13 @@ Model: Anthropic Claude 3 Sonnet
 
 Data Source: SEC EDGAR API
 
-## ✨ Key Features
+## Key Features
 * **Real-Time Summarization:** Extracts and summarizes key financial insights from massive SEC filings in seconds.
 * **Automated Ingestion Pipeline:** Programmatically fetches and preprocesses raw text/HTML filings for LLM consumption.
 * **Prompt Enrichment:** Implements context-aware prompting by injecting relevant filing segments into the LLM context window.
 * **Modular Architecture:** Separates CIK lookup logic from AI inference for better scalability and debugging.
 
-## 📁 Project Structure
+## Project Structure
 ```text
 ├── CIK_Lookup.py      # Core helper module for SEC CIK mapping and data retrieval
 ├── SEC_LambdaOne.py   # Ingestion: Downloads & stores master ticker data to S3
@@ -32,7 +32,7 @@ Data Source: SEC EDGAR API
 └── README.md          # Project documentation
 ```
 
-### ⚙️ How It Works
+### How It Works
 Request: The Lambda receives a JSON payload with a company, year, and question.
 
 Lookup: The CIKLookup class maps the company name to its unique SEC CIK and finds the filing URL.
